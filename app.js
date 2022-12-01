@@ -13,6 +13,7 @@ const countriesModel = require("./models/Country");
  * Controllers (route handlers).
  */
 const tasterController = require("./controllers/taster");
+const userController = require("./controllers/user");
 const tastingController = require("./controllers/tasting");
 const homeController = require("./controllers/home");
 
@@ -64,6 +65,16 @@ app.get("/create-tasting", tastingController.createView);
 app.post("/create-tasting", tastingController.create);
 app.get("/update-tasting/:id", tastingController.edit);
 
+app.get("/join", (req, res) => {
+  res.render('create-user', { errors: {} })
+});
+
+app.post("/join", userController.create);
+
+app.get("/login", (req, res) => {
+  res.render('login-user', { errors: {} })
+});
+app.post("/login", userController.login);
 
 app.get("/tastings", tastingController.list);
 app.get("/tastings/delete/:id", tastingController.delete);
